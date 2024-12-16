@@ -15,7 +15,7 @@ export class SubjectTimeService {
   ) {}
 
   async create(createSubjectTimeDto: CreateSubjectTimeDto) {
-    return this.subjectTimeRepository.create(createSubjectTimeDto);
+    return this.subjectTimeRepository.save(this.subjectTimeRepository.create(createSubjectTimeDto));
   }
 
   async findAll() {

@@ -3,8 +3,6 @@ import {
   Unique,
   Column,
   PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
   OneToMany,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
@@ -24,20 +22,18 @@ export class TeacherSubject {
   @ApiProperty()
   @Column({ name: 'teacherId' })
   teacherId: number;
-  @OneToOne(() => Teacher, {
+  @OneToMany(() => Teacher, (teacher) => teacher.teacherSubject, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn()
-  teacher: Teacher;
+  teachers: Teacher[];
 
   @ApiProperty()
   @Column({ name: 'subjectId' })
   subjectId: number;
-  @OneToOne(() => Subject, {
+  @OneToMany(() => Subject, (subject) => subject.teacherSubject, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn()
-  subject: Subject;
+  teacherSubject: TeacherSubject;
 
   @OneToMany(
     () => SubjectTime,

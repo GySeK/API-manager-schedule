@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
@@ -57,7 +57,7 @@ export class ScheduleService {
 
   async findAll() {
     return await this.scheduleRepository.find({
-      relations: ['scheduleBlocks', 'scheduleBlocks.scheduleLesson'],
+      relations: ['scheduleBlocks', 'scheduleBlocks.scheduleLessons'],
       select: {
         id: true,
         creationDate: true,

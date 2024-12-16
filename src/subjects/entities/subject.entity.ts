@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { TeacherSubject } from 'src/teacher-subject/entities/teacher-subject.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Subject {
@@ -14,4 +15,7 @@ export class Subject {
   @ApiProperty()
   @Column()
   complexity: number;
+
+  @ManyToOne(() => TeacherSubject, (teacherSubject) => teacherSubject.teachers)
+  teacherSubject: TeacherSubject
 }
