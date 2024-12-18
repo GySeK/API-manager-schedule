@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, CreateDateColumn, JoinColumn, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
+import { Entity, CreateDateColumn, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
 
 import { ScheduleBlock } from './scheduleBlock.entity';
 

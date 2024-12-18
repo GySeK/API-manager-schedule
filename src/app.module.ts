@@ -60,7 +60,6 @@ import { TeacherSubject } from './teacher-subject/entities/teacher-subject.entit
           TeacherSubject,
           SubjectTime,
         ],
-        //__dirname + "entities/**/*.entity.ts"
         synchronize:
           configService.get<string>('PRODUCTION') === 'TRUE' ? false : true,
       }),
