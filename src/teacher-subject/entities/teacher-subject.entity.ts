@@ -4,6 +4,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
+  ManyToOne
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -22,18 +23,18 @@ export class TeacherSubject {
   @ApiProperty()
   @Column({ name: 'teacherId' })
   teacherId: number;
-  @OneToMany(() => Teacher, (teacher) => teacher.teacherSubject, {
+  @ManyToOne(() => Teacher, (teacher) => teacher.teacherSubjects, {
     onDelete: 'CASCADE',
   })
-  teachers: Teacher[];
+  teacher: Teacher;
 
   @ApiProperty()
   @Column({ name: 'subjectId' })
   subjectId: number;
-  @OneToMany(() => Subject, (subject) => subject.teacherSubject, {
+  @ManyToOne(() => Subject, (subject) => subject.teacherSubjects, {
     onDelete: 'CASCADE',
   })
-  teacherSubject: TeacherSubject;
+  subject: Subject;
 
   @OneToMany(
     () => SubjectTime,
