@@ -12,6 +12,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Schedule } from './schedule.entity';
 import { Group } from 'src/groups/entities/group.entity';
 import { ScheduleLesson } from './scheduleLesson.entity';
+import { Cabinet } from 'src/cabinets/entities/cabinet.entity';
 
 @Entity()
 @Unique(['scheduleDate', 'groupId'])
@@ -34,6 +35,15 @@ export class ScheduleBlock {
     (scheduleLesson: ScheduleLesson) => scheduleLesson.scheduleBlock,
   )
   scheduleLessons: ScheduleLesson[];
+
+  @ApiProperty()
+  @Column({ name: 'cabinetId' })
+  cabinetId: number;
+  @ManyToOne(
+    () => Cabinet,
+    (cabinet: Cabinet) => cabinet.scheduleBlocks,
+  )
+  cabinet: Cabinet;
 
   @ApiProperty()
   @Column({ name: 'groupId' })

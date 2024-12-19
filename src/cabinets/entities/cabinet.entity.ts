@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, OneToMany, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ScheduleBlock } from 'src/schedule/entities/scheduleBlock.entity';
 
 @Entity()
 export class Cabinet {
@@ -10,4 +11,10 @@ export class Cabinet {
   @ApiProperty()
   @Column()
   name: string;
+  
+  @OneToMany(
+      () => ScheduleBlock,
+      (scheduleBlock: ScheduleBlock) => scheduleBlock.cabinet,
+    )
+    scheduleBlocks: ScheduleBlock[];
 }
