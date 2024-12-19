@@ -11,6 +11,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { ScheduleBlock } from './scheduleBlock.entity';
 import { TeacherSubject } from 'src/teacher-subject/entities/teacher-subject.entity';
+import { Cabinet } from 'src/cabinets/entities/cabinet.entity';
 
 @Entity()
 @Check('"lessonOrder" > 0')
@@ -43,6 +44,15 @@ export class ScheduleLesson {
     },
   )
   teacherSubject: TeacherSubject;
+
+  @ApiProperty()
+  @Column({ name: 'cabinetId' })
+  cabinetId: number;
+  @ManyToOne(
+    () => Cabinet,
+    (cabinet: Cabinet) => cabinet.scheduleLessons,
+  )
+  cabinet: Cabinet;
 
   @ApiProperty()
   @Column()

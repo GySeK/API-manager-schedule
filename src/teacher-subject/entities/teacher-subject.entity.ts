@@ -47,4 +47,5 @@ export class TeacherSubject {
     (scheduleLesson: ScheduleLesson) => scheduleLesson.teacherSubject,
   )
   scheduleLessons: ScheduleLesson[];
+  cabinet: any;
 }

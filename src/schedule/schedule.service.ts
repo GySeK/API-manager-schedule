@@ -39,16 +39,12 @@ export class ScheduleService {
           scheduleLesson.scheduleBlockId = scheduleBlockResult.id;
         }
 
-        const scheduleLessonResult = await manager.save(
+        await manager.save(
           ScheduleLesson,
           scheduleLessons,
         );
 
-        result = {
-          scheduleResult,
-          scheduleLessons,
-          scheduleLessonResult,
-        };
+        result = scheduleResult;
       }
     });
 
@@ -67,6 +63,7 @@ export class ScheduleService {
           scheduleDate: true,
           scheduleLessons: {
             id: true,
+            cabinetId: true,
             lessonOrder: true,
             startLesson: true,
             endLesson: true,
@@ -78,7 +75,28 @@ export class ScheduleService {
   }
 
   async findOne(id: number) {
-    return await this.scheduleRepository.findOneBy({ id });
+    return await this.scheduleRepository.findOne({
+      where: { id },
+      relations: ['scheduleBlocks', 'scheduleBlocks.scheduleLessons'],
+      select: {
+        id: true,
+        creationDate: true,
+        creatorLogin: true,
+        scheduleBlocks: {
+
+          groupId: true,
+          scheduleDate: true,
+          scheduleLessons: {
+            id: true,
+            cabinetId: true,
+            lessonOrder: true,
+            startLesson: true,
+            endLesson: true,
+            teacherSubjectId: true,
+          },
+        },
+      },
+    });
   }
 
   async update(id: number, updateScheduleDto: UpdateScheduleDto) {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Entity, OneToMany, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { ScheduleBlock } from 'src/schedule/entities/scheduleBlock.entity';
+import { ScheduleLesson } from 'src/schedule/entities/scheduleLesson.entity';
 
 @Entity()
 export class Cabinet {
@@ -13,8 +13,8 @@ export class Cabinet {
   name: string;
   
   @OneToMany(
-      () => ScheduleBlock,
-      (scheduleBlock: ScheduleBlock) => scheduleBlock.cabinet,
+      () => ScheduleLesson,
+      (scheduleLesson: ScheduleLesson) => scheduleLesson.cabinet,
     )
-    scheduleBlocks: ScheduleBlock[];
+  scheduleLessons: ScheduleLesson[];
 }
